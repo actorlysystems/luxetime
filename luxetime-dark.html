@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LuxeTime — Premium Watch Boutique</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- AOS -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8cc7a;
+      --gold-dim: #8a6f30;
+      --black: #0a0a0a;
+      --dark: #111111;
+      --dark2: #1a1a1a;
+      --dark3: #222222;
+      --gray: #888888;
+      --light-gray: #cccccc;
+      --white: #f5f3ef;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--dark); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--gold) !important;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .nav-link {
+      color: var(--light-gray) !important;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-link:hover { color: var(--gold) !important; }
+
+    .cart-btn {
+      background: transparent;
+      border: 1px solid var(--gold-dim);
+      color: var(--gold);
+      padding: 0.5rem 1.2rem;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      cursor: pointer;
+      position: relative;
+    }
+    .cart-btn:hover { background: var(--gold); color: var(--black); }
+
+    .cart-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: var(--gold);
+      color: var(--black);
+      font-size: 0.65rem;
+      font-weight: 700;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s;
+    }
+    .cart-badge.bump { animation: bump 0.3s ease; }
+    @keyframes bump { 0%,100%{transform:scale(1)} 50%{transform:scale(1.4)} }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 90vh;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1508 50%, #0a0a0a 100%);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 70% 50%, rgba(201,168,76,0.08) 0%, transparent 70%);
+    }
+    .hero-grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-label {
+      font-size: 0.65rem;
+      letter-spacing: 4px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title span { color: var(--gold); font-style: italic; }
+
+    .hero-sub {
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      color: var(--gray);
+      max-width: 380px;
+      line-height: 1.9;
+      margin-bottom: 2.5rem;
+    }
+    .btn-gold {
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+      padding: 0.85rem 2.5rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.25); color: var(--black); }
+
+    .btn-outline-gold {
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold-dim);
+      padding: 0.85rem 2.5rem;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-outline-gold:hover { background: rgba(201,168,76,0.1); }
+
+    .hero-watch-preview {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-watch-img {
+      width: 380px;
+      height: 480px;
+      object-fit: cover;
+      border: 1px solid rgba(201,168,76,0.2);
+      position: relative;
+      z-index: 2;
+      filter: brightness(0.9) contrast(1.1);
+    }
+    .hero-glow {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
+      z-index: 1;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 2.5rem;
+    }
+    .hero-stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      color: var(--gold);
+      display: block;
+    }
+    .hero-stat-lbl {
+      font-size: 0.6rem;
+      letter-spacing: 2px;
+      color: var(--gray);
+      text-transform: uppercase;
+    }
+
+    /* ── SECTION TITLE ── */
+    .section-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 4px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.1;
+    }
+    .section-line {
+      width: 50px;
+      height: 1px;
+      background: var(--gold);
+      margin: 1rem 0 2rem;
+    }
+
+    /* ── SEARCH BAR ── */
+    .search-wrap {
+      position: relative;
+      max-width: 500px;
+    }
+    .search-input {
+      background: var(--dark2);
+      border: 1px solid rgba(201,168,76,0.2);
+      color: var(--white);
+      padding: 0.75rem 1rem 0.75rem 3rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      width: 100%;
+      transition: border-color 0.3s;
+    }
+    .search-input:focus {
+      outline: none;
+      border-color: var(--gold);
+      background: var(--dark3);
+    }
+    .search-input::placeholder { color: var(--gray); }
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gold-dim);
+      font-size: 1rem;
+    }
+
+    /* ── FILTER SIDEBAR ── */
+    .filter-sidebar {
+      background: var(--dark2);
+      border: 1px solid rgba(201,168,76,0.1);
+      padding: 1.5rem;
+      position: sticky;
+      top: 80px;
+    }
+    .filter-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      color: var(--gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .filter-group { margin-bottom: 1.5rem; }
+    .filter-group-label {
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      color: var(--gray);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .filter-check {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      padding: 0.3rem 0;
+      font-size: 0.78rem;
+      color: var(--light-gray);
+      transition: color 0.2s;
+    }
+    .filter-check:hover { color: var(--gold); }
+    .filter-check input[type="checkbox"] {
+      accent-color: var(--gold);
+      width: 14px;
+      height: 14px;
+      cursor: pointer;
+    }
+
+    /* Price Range */
+    .price-range input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(to right, var(--gold) 0%, var(--gold) var(--val, 80%), rgba(201,168,76,0.2) var(--val, 80%));
+      outline: none;
+      cursor: pointer;
+      margin: 0.5rem 0;
+    }
+    .price-range input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--gold);
+      cursor: pointer;
+      border: 2px solid var(--black);
+    }
+    .price-display {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--gray);
+      margin-top: 0.25rem;
+    }
+    .price-display span { color: var(--gold); font-weight: 500; }
+
+    .btn-clear-filters {
+      background: transparent;
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--gray);
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.5rem 1rem;
+      width: 100%;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 0.5rem;
+    }
+    .btn-clear-filters:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── SORT BAR ── */
+    .sort-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .results-count {
+      font-size: 0.75rem;
+      color: var(--gray);
+      letter-spacing: 1px;
+    }
+    .results-count span { color: var(--gold); }
+
+    .sort-select {
+      background: var(--dark2);
+      border: 1px solid rgba(201,168,76,0.2);
+      color: var(--light-gray);
+      padding: 0.4rem 0.8rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 1px;
+      cursor: pointer;
+    }
+    .sort-select:focus { outline: none; border-color: var(--gold); }
+    .sort-select option { background: var(--dark2); }
+
+    /* ── PRODUCT CARD ── */
+    .product-card {
+      background: var(--dark2);
+      border: 1px solid rgba(201,168,76,0.08);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .product-card:hover {
+      border-color: rgba(201,168,76,0.35);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,76,0.1);
+    }
+    .product-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201,168,76,0.03) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .product-card:hover::before { opacity: 1; }
+
+    .product-img-wrap {
+      position: relative;
+      overflow: hidden;
+      height: 240px;
+      background: var(--dark3);
+    }
+    .product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    .product-card:hover .product-img { transform: scale(1.07); }
+
+    .badge-new, .badge-sale {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.25rem 0.65rem;
+      z-index: 2;
+    }
+    .badge-new { background: var(--gold); color: var(--black); }
+    .badge-sale { background: #c0392b; color: white; }
+
+    .wishlist-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(10,10,10,0.7);
+      border: 1px solid rgba(201,168,76,0.2);
+      color: var(--gray);
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      z-index: 2;
+      font-size: 0.85rem;
+    }
+    .wishlist-btn:hover, .wishlist-btn.active { color: #e74c3c; border-color: #e74c3c; }
+    .wishlist-btn.active { background: rgba(231,76,60,0.1); }
+
+    .product-body { padding: 1.2rem; }
+    .product-brand {
+      font-size: 0.6rem;
+      letter-spacing: 3px;
+      color: var(--gold-dim);
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+    .product-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+      line-height: 1.2;
+    }
+    .product-rating { display: flex; align-items: center; gap: 0.3rem; margin-bottom: 0.75rem; }
+    .stars { color: var(--gold); font-size: 0.7rem; }
+    .rating-count { font-size: 0.65rem; color: var(--gray); }
+    .product-price-row { display: flex; align-items: center; justify-content: space-between; }
+    .product-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .product-price-old {
+      font-size: 0.8rem;
+      color: var(--gray);
+      text-decoration: line-through;
+      margin-left: 0.4rem;
+    }
+    .add-cart-btn {
+      background: transparent;
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--gold);
+      padding: 0.4rem 0.9rem;
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .add-cart-btn:hover { background: var(--gold); color: var(--black); }
+    .add-cart-btn.added { background: var(--gold); color: var(--black); }
+
+    .out-of-stock-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+    }
+    .out-of-stock-label {
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      color: var(--gray);
+      text-transform: uppercase;
+      border: 1px solid var(--gray);
+      padding: 0.4rem 1rem;
+    }
+
+    /* ── CART DRAWER ── */
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s;
+    }
+    .cart-overlay.open { opacity: 1; pointer-events: all; }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 420px;
+      max-width: 95vw;
+      height: 100vh;
+      background: var(--dark2);
+      border-left: 1px solid rgba(201,168,76,0.15);
+      z-index: 2001;
+      transform: translateX(100%);
+      transition: transform 0.45s cubic-bezier(0.165, 0.84, 0.44, 1);
+      display: flex;
+      flex-direction: column;
+    }
+    .cart-drawer.open { transform: translateX(0); }
+
+    .cart-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cart-header-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      letter-spacing: 2px;
+    }
+    .close-cart {
+      background: transparent;
+      border: none;
+      color: var(--gray);
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .close-cart:hover { color: var(--white); }
+
+    .cart-items { flex: 1; overflow-y: auto; padding: 1rem 1.5rem; }
+
+    .cart-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(201,168,76,0.07);
+      animation: slideInRight 0.3s ease;
+    }
+    @keyframes slideInRight { from{opacity:0;transform:translateX(20px)} to{opacity:1;transform:translateX(0)} }
+
+    .cart-item-img {
+      width: 70px;
+      height: 80px;
+      object-fit: cover;
+      border: 1px solid rgba(201,168,76,0.1);
+      flex-shrink: 0;
+    }
+    .cart-item-info { flex: 1; }
+    .cart-item-brand { font-size: 0.6rem; letter-spacing: 2px; color: var(--gold-dim); text-transform: uppercase; }
+    .cart-item-name { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--white); margin: 0.15rem 0; }
+    .cart-item-price { font-size: 0.85rem; color: var(--gold); }
+    .qty-control { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.4rem; }
+    .qty-btn {
+      background: var(--dark3);
+      border: 1px solid rgba(201,168,76,0.2);
+      color: var(--gold);
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.2s;
+    }
+    .qty-btn:hover { background: var(--gold); color: var(--black); }
+    .qty-num { font-size: 0.8rem; color: var(--white); min-width: 20px; text-align: center; }
+    .remove-item {
+      background: transparent;
+      border: none;
+      color: var(--gray);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: color 0.2s;
+      padding: 0;
+      align-self: flex-start;
+    }
+    .remove-item:hover { color: #e74c3c; }
+
+    .cart-empty {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--gray);
+    }
+    .cart-empty i { font-size: 3rem; color: var(--dark3); margin-bottom: 1rem; display: block; }
+    .cart-empty p { font-size: 0.8rem; letter-spacing: 1px; }
+
+    /* Coupon */
+    .cart-footer { padding: 1.5rem; border-top: 1px solid rgba(201,168,76,0.1); }
+    .coupon-row { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+    .coupon-input {
+      flex: 1;
+      background: var(--dark3);
+      border: 1px solid rgba(201,168,76,0.2);
+      color: var(--white);
+      padding: 0.55rem 0.8rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .coupon-input:focus { outline: none; border-color: var(--gold); }
+    .coupon-input::placeholder { color: var(--gray); text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem; }
+    .apply-coupon-btn {
+      background: transparent;
+      border: 1px solid var(--gold-dim);
+      color: var(--gold);
+      padding: 0.55rem 1rem;
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+    .apply-coupon-btn:hover { background: var(--gold); color: var(--black); }
+    .coupon-applied {
+      font-size: 0.7rem;
+      color: #2ecc71;
+      letter-spacing: 1px;
+      margin-bottom: 0.75rem;
+      display: none;
+    }
+    .coupon-applied.show { display: flex; align-items: center; gap: 0.4rem; }
+
+    .cart-totals { margin-bottom: 1rem; }
+    .total-row { display: flex; justify-content: space-between; margin-bottom: 0.4rem; }
+    .total-label { font-size: 0.72rem; color: var(--gray); letter-spacing: 1px; }
+    .total-val { font-size: 0.72rem; color: var(--light-gray); }
+    .total-val.discount { color: #2ecc71; }
+    .total-row.final .total-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--white);
+      font-weight: 500;
+    }
+    .total-row.final .total-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      color: var(--gold);
+    }
+    .divider-line { border: none; border-top: 1px solid rgba(201,168,76,0.1); margin: 0.75rem 0; }
+    .checkout-btn {
+      width: 100%;
+      background: var(--gold);
+      border: none;
+      color: var(--black);
+      padding: 0.9rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .checkout-btn:hover { background: var(--gold-light); box-shadow: 0 4px 20px rgba(201,168,76,0.3); }
+
+    /* ── TOAST ── */
+    .toast-container { position: fixed; bottom: 2rem; right: 2rem; z-index: 9999; display: flex; flex-direction: column; gap: 0.5rem; }
+    .toast-msg {
+      background: var(--dark2);
+      border-left: 3px solid var(--gold);
+      color: var(--white);
+      padding: 0.85rem 1.2rem;
+      font-size: 0.78rem;
+      letter-spacing: 1px;
+      min-width: 260px;
+      transform: translateX(120%);
+      animation: toastIn 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards, toastOut 0.4s 2.8s ease forwards;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .toast-msg.error { border-left-color: #e74c3c; }
+    .toast-msg.success { border-left-color: #2ecc71; }
+    .toast-msg i { font-size: 1rem; }
+    .toast-msg.error i { color: #e74c3c; }
+    .toast-msg.success i { color: #2ecc71; }
+    @keyframes toastIn { to { transform: translateX(0); } }
+    @keyframes toastOut { to { transform: translateX(120%); opacity: 0; } }
+
+    /* ── NO RESULTS ── */
+    .no-results {
+      text-align: center;
+      padding: 4rem 1rem;
+      color: var(--gray);
+      display: none;
+    }
+    .no-results i { font-size: 3rem; color: var(--dark3); margin-bottom: 1rem; display: block; }
+    .no-results h4 { font-family: 'Cormorant Garamond', serif; color: var(--light-gray); margin-bottom: 0.5rem; }
+    .no-results p { font-size: 0.78rem; }
+
+    /* ── MARQUEE ── */
+    .marquee-band {
+      background: var(--gold);
+      padding: 0.65rem 0;
+      overflow: hidden;
+    }
+    .marquee-track {
+      display: flex;
+      gap: 3rem;
+      animation: marquee 20s linear infinite;
+      white-space: nowrap;
+    }
+    .marquee-item {
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--black);
+      font-weight: 600;
+    }
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark2);
+      border-top: 1px solid rgba(201,168,76,0.1);
+      padding: 3rem 0 2rem;
+    }
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      color: var(--gold);
+      letter-spacing: 4px;
+    }
+    .footer-tagline { font-size: 0.7rem; color: var(--gray); letter-spacing: 2px; margin-top: 0.3rem; }
+    .footer-heading { font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .footer-link { display: block; font-size: 0.75rem; color: var(--gray); margin-bottom: 0.4rem; text-decoration: none; transition: color 0.3s; letter-spacing: 1px; }
+    .footer-link:hover { color: var(--gold); }
+    .footer-bottom { border-top: 1px solid rgba(201,168,76,0.08); padding-top: 1.5rem; margin-top: 2rem; text-align: center; }
+    .footer-copy { font-size: 0.65rem; color: var(--gray); letter-spacing: 2px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero-watch-preview { display: none; }
+      .filter-sidebar { position: static; }
+      .cart-drawer { width: 100vw; }
+    }
+
+    /* ── UTILITIES ── */
+    section { padding: 5rem 0; }
+    .products-section { padding: 4rem 0; }
+    .hidden { display: none !important; }
+
+    /* Floating particles */
+    .particle {
+      position: fixed;
+      pointer-events: none;
+      width: 2px;
+      height: 2px;
+      background: var(--gold);
+      border-radius: 50%;
+      opacity: 0;
+      z-index: 9990;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="#">LuxeTime</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span style="color:var(--gold);font-size:1.5rem"><i class="bi bi-list"></i></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav mx-auto gap-3">
+        <li class="nav-item"><a class="nav-link" href="#collections">Collections</a></li>
+        <li class="nav-item"><a class="nav-link" href="#shop">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Brands</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-3">
+        <button class="cart-btn" onclick="toggleCart()">
+          <i class="bi bi-bag me-1"></i> Cart
+          <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-grid-lines"></div>
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <p class="hero-label" id="heroLabel">— New Collection 2025</p>
+        <h1 class="hero-title" id="heroTitle">
+          Time Is The<br><span>Ultimate</span><br>Luxury
+        </h1>
+        <p class="hero-sub" id="heroSub">Discover timepieces that define eras. Handcrafted movements, iconic designs, enduring excellence.</p>
+        <div class="d-flex gap-3 flex-wrap" id="heroBtns">
+          <a href="#shop" class="btn-gold">Explore Collection</a>
+          <button class="btn-outline-gold">Our Story</button>
+        </div>
+        <div class="hero-stats" id="heroStats">
+          <div>
+            <span class="hero-stat-num">340+</span>
+            <span class="hero-stat-lbl">Models</span>
+          </div>
+          <div>
+            <span class="hero-stat-num">28</span>
+            <span class="hero-stat-lbl">Brands</span>
+          </div>
+          <div>
+            <span class="hero-stat-num">12K+</span>
+            <span class="hero-stat-lbl">Clients</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="hero-watch-preview">
+          <div class="hero-glow"></div>
+          <img src="https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?w=600&q=80" alt="Featured Watch" class="hero-watch-img" id="heroImg"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-band">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item">Free Shipping Over ₹50,000</span>
+    <span class="marquee-item">★</span>
+    <span class="marquee-item">Use Code LUXE10 — 10% Off</span>
+    <span class="marquee-item">★</span>
+    <span class="marquee-item">Authentic Certified Timepieces</span>
+    <span class="marquee-item">★</span>
+    <span class="marquee-item">2-Year International Warranty</span>
+    <span class="marquee-item">★</span>
+    <span class="marquee-item">Free Shipping Over ₹50,000</span>
+    <span class="marquee-item">★</span>
+    <span class="marquee-item">Use Code LUXE10 — 10% Off</span>
+    <span class="marquee-item">★</span>
+    <span class="marquee-item">Authentic Certified Timepieces</span>
+    <span class="marquee-item">★</span>
+    <span class="marquee-item">2-Year International Warranty</span>
+    <span class="marquee-item">★</span>
+  </div>
+</div>
+
+<!-- SHOP -->
+<section class="products-section" id="shop">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-12" data-aos="fade-up">
+        <p class="section-eyebrow">Our Catalogue</p>
+        <h2 class="section-title">The Collection</h2>
+        <div class="section-line"></div>
+      </div>
+    </div>
+
+    <!-- Search -->
+    <div class="row mb-4">
+      <div class="col-lg-5" data-aos="fade-right">
+        <div class="search-wrap">
+          <i class="bi bi-search search-icon"></i>
+          <input type="text" class="search-input" id="searchInput" placeholder="Search watches, brands..."/>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Filters -->
+      <div class="col-lg-3 col-md-4 mb-4" data-aos="fade-right">
+        <div class="filter-sidebar">
+          <div class="filter-title">Filters</div>
+
+          <!-- Brand -->
+          <div class="filter-group">
+            <div class="filter-group-label">Brand</div>
+            <label class="filter-check"><input type="checkbox" class="filter-brand" value="Rolex"> Rolex</label>
+            <label class="filter-check"><input type="checkbox" class="filter-brand" value="Omega"> Omega</label>
+            <label class="filter-check"><input type="checkbox" class="filter-brand" value="Tag Heuer"> Tag Heuer</label>
+            <label class="filter-check"><input type="checkbox" class="filter-brand" value="Seiko"> Seiko</label>
+            <label class="filter-check"><input type="checkbox" class="filter-brand" value="Casio"> Casio</label>
+            <label class="filter-check"><input type="checkbox" class="filter-brand" value="Tissot"> Tissot</label>
+          </div>
+
+          <!-- Category -->
+          <div class="filter-group">
+            <div class="filter-group-label">Category</div>
+            <label class="filter-check"><input type="checkbox" class="filter-cat" value="Luxury"> Luxury</label>
+            <label class="filter-check"><input type="checkbox" class="filter-cat" value="Sport"> Sport</label>
+            <label class="filter-check"><input type="checkbox" class="filter-cat" value="Casual"> Casual</label>
+            <label class="filter-check"><input type="checkbox" class="filter-cat" value="Smart"> Smart</label>
+            <label class="filter-check"><input type="checkbox" class="filter-cat" value="Diver"> Diver</label>
+          </div>
+
+          <!-- Gender -->
+          <div class="filter-group">
+            <div class="filter-group-label">Gender</div>
+            <label class="filter-check"><input type="checkbox" class="filter-gender" value="Men"> Men</label>
+            <label class="filter-check"><input type="checkbox" class="filter-gender" value="Women"> Women</label>
+            <label class="filter-check"><input type="checkbox" class="filter-gender" value="Unisex"> Unisex</label>
+          </div>
+
+          <!-- In Stock -->
+          <div class="filter-group">
+            <div class="filter-group-label">Availability</div>
+            <label class="filter-check"><input type="checkbox" id="filterStock"> In Stock Only</label>
+          </div>
+
+          <!-- Price Range -->
+          <div class="filter-group">
+            <div class="filter-group-label">Max Price</div>
+            <div class="price-range">
+              <input type="range" id="priceRange" min="5000" max="500000" value="500000" step="5000"/>
+            </div>
+            <div class="price-display">
+              <span>₹5,000</span>
+              <span>Up to ₹<span id="priceVal">5,00,000</span></span>
+            </div>
+          </div>
+
+          <button class="btn-clear-filters" onclick="clearFilters()">
+            <i class="bi bi-x-circle me-1"></i> Clear All Filters
+          </button>
+        </div>
+      </div>
+
+      <!-- Products -->
+      <div class="col-lg-9 col-md-8">
+        <div class="sort-bar">
+          <p class="results-count"><span id="resultsCount">12</span> timepieces found</p>
+          <select class="sort-select" id="sortSelect">
+            <option value="default">Sort: Featured</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="rating">Top Rated</option>
+            <option value="name">Name: A–Z</option>
+          </select>
+        </div>
+
+        <div class="no-results" id="noResults">
+          <i class="bi bi-watch"></i>
+          <h4>No Timepieces Found</h4>
+          <p>Try adjusting your filters or search term.</p>
+        </div>
+
+        <div class="row g-3" id="productsGrid">
+          <!-- Products injected by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-4">
+        <div class="footer-brand">LuxeTime</div>
+        <div class="footer-tagline">Where Time Meets Craftsmanship</div>
+        <p style="font-size:0.72rem;color:var(--gray);margin-top:1rem;line-height:1.8;letter-spacing:0.5px;">Curating the world's finest timepieces since 2009. Every watch tells a story.</p>
+      </div>
+      <div class="col-lg-2 col-6 mb-4">
+        <div class="footer-heading">Shop</div>
+        <a class="footer-link" href="#">New Arrivals</a>
+        <a class="footer-link" href="#">Luxury</a>
+        <a class="footer-link" href="#">Sport</a>
+        <a class="footer-link" href="#">Sale</a>
+      </div>
+      <div class="col-lg-2 col-6 mb-4">
+        <div class="footer-heading">Service</div>
+        <a class="footer-link" href="#">Contact Us</a>
+        <a class="footer-link" href="#">Returns</a>
+        <a class="footer-link" href="#">Warranty</a>
+        <a class="footer-link" href="#">Track Order</a>
+      </div>
+      <div class="col-lg-4 mb-4">
+        <div class="footer-heading">Coupon Codes</div>
+        <div style="font-size:0.72rem;color:var(--gray);line-height:2;letter-spacing:1px;">
+          <div><span style="color:var(--gold);font-weight:600;">LUXE10</span> — 10% off any order</div>
+          <div><span style="color:var(--gold);font-weight:600;">WATCH20</span> — 20% off orders ₹1L+</div>
+          <div><span style="color:var(--gold);font-weight:600;">FREE50</span> — Free express shipping</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 LuxeTime. All rights reserved. Crafted with precision.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- CART OVERLAY + DRAWER -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <span class="cart-header-title">Your Selection</span>
+    <button class="close-cart" onclick="toggleCart()"><i class="bi bi-x-lg"></i></button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty" id="cartEmpty">
+      <i class="bi bi-bag"></i>
+      <p>Your cart is empty.<br>Add a timepiece to begin.</p>
+    </div>
+  </div>
+  <div class="cart-footer">
+    <div class="coupon-row">
+      <input type="text" class="coupon-input" id="couponInput" placeholder="Coupon Code"/>
+      <button class="apply-coupon-btn" onclick="applyCoupon()">Apply</button>
+    </div>
+    <div class="coupon-applied" id="couponApplied">
+      <i class="bi bi-check-circle-fill" style="color:#2ecc71"></i>
+      <span id="couponMsg"></span>
+    </div>
+    <div class="cart-totals" id="cartTotals">
+      <div class="total-row">
+        <span class="total-label">Subtotal</span>
+        <span class="total-val" id="subtotalVal">₹0</span>
+      </div>
+      <div class="total-row" id="discountRow" style="display:none">
+        <span class="total-label">Discount</span>
+        <span class="total-val discount" id="discountVal">-₹0</span>
+      </div>
+      <div class="total-row">
+        <span class="total-label">Shipping</span>
+        <span class="total-val" id="shippingVal">₹500</span>
+      </div>
+      <hr class="divider-line"/>
+      <div class="total-row final">
+        <span class="total-label">Total</span>
+        <span class="total-val" id="totalVal">₹0</span>
+      </div>
+    </div>
+    <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+  </div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+
+<script>
+// ── DATA ──
+const watches = [
+  { id:1, name:"Submariner Date", brand:"Rolex", category:"Luxury", gender:"Men", price:950000, oldPrice:null, image:"https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=400&q=80", rating:4.9, reviews:312, inStock:true, isNew:true },
+  { id:2, name:"Speedmaster Moonwatch", brand:"Omega", category:"Luxury", gender:"Men", price:520000, oldPrice:580000, image:"https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?w=400&q=80", rating:4.8, reviews:245, inStock:true, isNew:false },
+  { id:3, name:"Carrera Chronograph", brand:"Tag Heuer", category:"Sport", gender:"Men", price:220000, oldPrice:250000, image:"https://images.unsplash.com/photo-1623998021446-45cd9b269056?w=400&q=80", rating:4.7, reviews:189, inStock:true, isNew:false },
+  { id:4, name:"Presage Cocktail Time", brand:"Seiko", category:"Casual", gender:"Unisex", price:48000, oldPrice:null, image:"https://images.unsplash.com/photo-1526045612212-70caf35c14df?w=400&q=80", rating:4.6, reviews:421, inStock:true, isNew:true },
+  { id:5, name:"G-Shock GA-2100", brand:"Casio", category:"Sport", gender:"Unisex", price:12500, oldPrice:14000, image:"https://images.unsplash.com/photo-1508057198894-247b23fe5ade?w=400&q=80", rating:4.5, reviews:678, inStock:true, isNew:false },
+  { id:6, name:"PRX Powermatic 80", brand:"Tissot", category:"Casual", gender:"Women", price:85000, oldPrice:null, image:"https://images.unsplash.com/photo-1609587312208-cea54be969e7?w=400&q=80", rating:4.7, reviews:156, inStock:false, isNew:false },
+  { id:7, name:"Seamaster Aqua Terra", brand:"Omega", category:"Diver", gender:"Unisex", price:480000, oldPrice:520000, image:"https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=400&q=80", rating:4.9, reviews:201, inStock:true, isNew:true },
+  { id:8, name:"Edifice EFS-S590", brand:"Casio", category:"Smart", gender:"Men", price:22000, oldPrice:null, image:"https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=400&q=80", rating:4.4, reviews:332, inStock:true, isNew:false },
+  { id:9, name:"Datejust 41", brand:"Rolex", category:"Luxury", gender:"Men", price:1150000, oldPrice:null, image:"https://images.unsplash.com/photo-1612817159949-195b6eb9e31a?w=400&q=80", rating:5.0, reviews:89, inStock:true, isNew:false },
+  { id:10, name:"Constellation Co-Axial", brand:"Omega", category:"Luxury", gender:"Women", price:420000, oldPrice:460000, image:"https://images.unsplash.com/photo-1542496658-e33a6d0d5f5c?w=400&q=80", rating:4.8, reviews:113, inStock:true, isNew:false },
+  { id:11, name:"Seiko 5 Sports", brand:"Seiko", category:"Sport", gender:"Men", price:18000, oldPrice:22000, image:"https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=400&q=80", rating:4.6, reviews:502, inStock:true, isNew:false },
+  { id:12, name:"T-Touch Connect Solar", brand:"Tissot", category:"Smart", gender:"Unisex", price:115000, oldPrice:null, image:"https://images.unsplash.com/photo-1577303935007-0d306ee638cf?w=400&q=80", rating:4.5, reviews:77, inStock:false, isNew:true },
+];
+
+// ── STATE ──
+let cart = [];
+let wishlist = [];
+let appliedCoupon = null;
+const COUPONS = {
+  "LUXE10":  { type:"percent", value:10, msg:"10% discount applied!" },
+  "WATCH20": { type:"percent", value:20, msg:"20% discount applied!" },
+  "FREE50":  { type:"shipping", value:0, msg:"Free shipping applied!" },
+};
+
+// ── INIT ──
+document.addEventListener('DOMContentLoaded', () => {
+  if (typeof AOS !== 'undefined') {
+    AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 60 });
+  }
+  if (typeof gsap !== 'undefined') {
+    initGSAP();
+  }
+  renderProducts(watches);
+  bindFilters();
+  updatePriceDisplay();
+});
+
+// ── GSAP HERO ANIMATION ──
+function initGSAP() {
+  const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+  tl.from("#heroLabel",  { y: 30, opacity: 0, duration: 0.7 })
+    .from("#heroTitle",  { y: 50, opacity: 0, duration: 0.9 }, "-=0.4")
+    .from("#heroSub",    { y: 30, opacity: 0, duration: 0.7 }, "-=0.5")
+    .from("#heroBtns",   { y: 20, opacity: 0, duration: 0.6 }, "-=0.4")
+    .from("#heroStats > div", { y: 20, opacity: 0, stagger: 0.15, duration: 0.5 }, "-=0.3")
+    .from("#heroImg",    { x: 60, opacity: 0, duration: 1.0 }, "-=0.8");
+}
+
+// ── RENDER PRODUCTS ──
+function renderProducts(list) {
+  const grid = document.getElementById('productsGrid');
+  const noRes = document.getElementById('noResults');
+  document.getElementById('resultsCount').textContent = list.length;
+
+  if (list.length === 0) {
+    grid.innerHTML = '';
+    noRes.style.display = 'block';
+    return;
+  }
+  noRes.style.display = 'none';
+
+  grid.innerHTML = list.map((w, i) => `
+    <div class="col-lg-4 col-md-6 col-sm-6" data-aos="fade-up" data-aos-delay="${(i % 3) * 80}">
+      <div class="product-card" id="card-${w.id}">
+        <div class="product-img-wrap">
+          <img src="${w.image}" alt="${w.name}" class="product-img" onerror="this.src='https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?w=400&q=80'"/>
+          ${w.isNew ? '<span class="badge-new">New</span>' : ''}
+          ${w.oldPrice ? '<span class="badge-sale">Sale</span>' : ''}
+          <button class="wishlist-btn ${wishlist.includes(w.id)?'active':''}" onclick="toggleWishlist(${w.id}, this)">
+            <i class="bi bi-heart${wishlist.includes(w.id)?'-fill':''}"></i>
+          </button>
+          ${!w.inStock ? '<div class="out-of-stock-overlay"><span class="out-of-stock-label">Out of Stock</span></div>' : ''}
+        </div>
+        <div class="product-body">
+          <div class="product-brand">${w.brand}</div>
+          <div class="product-name">${w.name}</div>
+          <div class="product-rating">
+            <span class="stars">${renderStars(w.rating)}</span>
+            <span class="rating-count">(${w.reviews})</span>
+          </div>
+          <div class="product-price-row">
+            <div>
+              <span class="product-price">₹${w.price.toLocaleString('en-IN')}</span>
+              ${w.oldPrice ? `<span class="product-price-old">₹${w.oldPrice.toLocaleString('en-IN')}</span>` : ''}
+            </div>
+            ${w.inStock
+              ? `<button class="add-cart-btn" id="btn-${w.id}" onclick="addToCart(${w.id})">Add</button>`
+              : `<button class="add-cart-btn" disabled style="opacity:0.3;cursor:not-allowed">Sold</button>`
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  if (typeof AOS !== 'undefined') AOS.refresh();
+}
+
+function renderStars(r) {
+  const full = Math.floor(r);
+  const half = r % 1 >= 0.5;
+  let s = '';
+  for (let i=0; i<full; i++) s += '<i class="bi bi-star-fill"></i>';
+  if (half) s += '<i class="bi bi-star-half"></i>';
+  return s;
+}
+
+// ── CART ──
+function addToCart(id) {
+  const w = watches.find(x => x.id === id);
+  const existing = cart.find(x => x.id === id);
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({ ...w, qty: 1 });
+  }
+  updateCartUI();
+  showToast(`${w.name} added to cart`, 'success', 'bag-check-fill');
+
+  // button feedback
+  const btn = document.getElementById(`btn-${id}`);
+  if (btn) {
+    btn.textContent = '✓ Added';
+    btn.classList.add('added');
+    setTimeout(() => { btn.textContent = 'Add'; btn.classList.remove('added'); }, 1500);
+  }
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(x => x.id !== id);
+  if (appliedCoupon) validateCouponStillValid();
+  updateCartUI();
+}
+
+function changeQty(id, delta) {
+  const item = cart.find(x => x.id === id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) removeFromCart(id);
+  else updateCartUI();
+}
+
+function updateCartUI() {
+  const badge = document.getElementById('cartBadge');
+  const total = cart.reduce((a, x) => a + x.qty, 0);
+  badge.textContent = total;
+  badge.classList.add('bump');
+  setTimeout(() => badge.classList.remove('bump'), 300);
+
+  renderCartItems();
+  renderCartTotals();
+}
+
+function renderCartItems() {
+  const container = document.getElementById('cartItems');
+  const empty = document.getElementById('cartEmpty');
+
+  if (cart.length === 0) {
+    container.innerHTML = '';
+    container.appendChild(empty);
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+  container.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <img src="${item.image}" alt="${item.name}" class="cart-item-img"/>
+      <div class="cart-item-info">
+        <div class="cart-item-brand">${item.brand}</div>
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">₹${item.price.toLocaleString('en-IN')}</div>
+        <div class="qty-control">
+          <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
+          <span class="qty-num">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+        </div>
+      </div>
+      <button class="remove-item" onclick="removeFromCart(${item.id})"><i class="bi bi-trash3"></i></button>
+    </div>
+  `).join('');
+}
+
+function renderCartTotals() {
+  const subtotal = cart.reduce((a, x) => a + x.price * x.qty, 0);
+  let discount = 0;
+  let shipping = subtotal > 50000 ? 0 : 500;
+
+  if (appliedCoupon) {
+    const c = COUPONS[appliedCoupon];
+    if (c.type === 'percent') discount = Math.round(subtotal * c.value / 100);
+    if (c.type === 'shipping') shipping = 0;
+  }
+
+  const total = subtotal - discount + shipping;
+
+  document.getElementById('subtotalVal').textContent = '₹' + subtotal.toLocaleString('en-IN');
+  document.getElementById('shippingVal').textContent = shipping === 0 ? 'Free' : '₹' + shipping.toLocaleString('en-IN');
+  document.getElementById('totalVal').textContent = '₹' + total.toLocaleString('en-IN');
+
+  const discRow = document.getElementById('discountRow');
+  if (discount > 0) {
+    discRow.style.display = 'flex';
+    document.getElementById('discountVal').textContent = '-₹' + discount.toLocaleString('en-IN');
+  } else {
+    discRow.style.display = 'none';
+  }
+}
+
+// ── CART TOGGLE ──
+function toggleCart() {
+  const overlay = document.getElementById('cartOverlay');
+  const drawer = document.getElementById('cartDrawer');
+  overlay.classList.toggle('open');
+  drawer.classList.toggle('open');
+}
+
+// ── COUPON ──
+function applyCoupon() {
+  const code = document.getElementById('couponInput').value.trim().toUpperCase();
+  const msgEl = document.getElementById('couponApplied');
+  const msgText = document.getElementById('couponMsg');
+
+  if (!code) { showToast('Enter a coupon code', 'error', 'exclamation-circle-fill'); return; }
+  if (!COUPONS[code]) { showToast('Invalid coupon code', 'error', 'x-circle-fill'); return; }
+  if (cart.length === 0) { showToast('Add items to cart first', 'error', 'bag-x-fill'); return; }
+
+  appliedCoupon = code;
+  msgText.textContent = COUPONS[code].msg;
+  msgEl.classList.add('show');
+  renderCartTotals();
+  showToast(COUPONS[code].msg, 'success', 'tag-fill');
+}
+
+function validateCouponStillValid() {
+  if (cart.length === 0) {
+    appliedCoupon = null;
+    document.getElementById('couponApplied').classList.remove('show');
+  }
+}
+
+// ── WISHLIST ──
+function toggleWishlist(id, btn) {
+  const w = watches.find(x => x.id === id);
+  if (wishlist.includes(id)) {
+    wishlist = wishlist.filter(x => x !== id);
+    btn.classList.remove('active');
+    btn.innerHTML = '<i class="bi bi-heart"></i>';
+    showToast(`Removed from wishlist`, 'default', 'heart');
+  } else {
+    wishlist.push(id);
+    btn.classList.add('active');
+    btn.innerHTML = '<i class="bi bi-heart-fill"></i>';
+    showToast(`${w.name} wishlisted`, 'success', 'heart-fill');
+  }
+}
+
+// ── TOAST ──
+function showToast(msg, type='default', icon='check-circle-fill') {
+  const container = document.getElementById('toastContainer');
+  const div = document.createElement('div');
+  div.className = `toast-msg ${type}`;
+  div.innerHTML = `<i class="bi bi-${icon}"></i> ${msg}`;
+  container.appendChild(div);
+  setTimeout(() => div.remove(), 3400);
+}
+
+// ── FILTERS & SEARCH ──
+function getFilteredWatches() {
+  const brands = [...document.querySelectorAll('.filter-brand:checked')].map(x => x.value);
+  const cats   = [...document.querySelectorAll('.filter-cat:checked')].map(x => x.value);
+  const genders= [...document.querySelectorAll('.filter-gender:checked')].map(x => x.value);
+  const stock  = document.getElementById('filterStock').checked;
+  const maxPrice = parseInt(document.getElementById('priceRange').value);
+  const query  = document.getElementById('searchInput').value.toLowerCase().trim();
+  const sort   = document.getElementById('sortSelect').value;
+
+  let list = watches.filter(w => {
+    if (brands.length  && !brands.includes(w.brand))    return false;
+    if (cats.length    && !cats.includes(w.category))   return false;
+    if (genders.length && !genders.includes(w.gender))  return false;
+    if (stock          && !w.inStock)                   return false;
+    if (w.price > maxPrice)                             return false;
+    if (query && !w.name.toLowerCase().includes(query) && !w.brand.toLowerCase().includes(query)) return false;
+    return true;
+  });
+
+  if (sort === 'price-asc')  list = [...list].sort((a,b) => a.price - b.price);
+  if (sort === 'price-desc') list = [...list].sort((a,b) => b.price - a.price);
+  if (sort === 'rating')     list = [...list].sort((a,b) => b.rating - a.rating);
+  if (sort === 'name')       list = [...list].sort((a,b) => a.name.localeCompare(b.name));
+
+  return list;
+}
+
+function applyFilters() { renderProducts(getFilteredWatches()); }
+
+function bindFilters() {
+  document.querySelectorAll('.filter-brand, .filter-cat, .filter-gender, #filterStock').forEach(el => {
+    el.addEventListener('change', applyFilters);
+  });
+  document.getElementById('priceRange').addEventListener('input', function() {
+    updatePriceDisplay();
+    applyFilters();
+  });
+  document.getElementById('searchInput').addEventListener('input', applyFilters);
+  document.getElementById('sortSelect').addEventListener('change', applyFilters);
+}
+
+function updatePriceDisplay() {
+  const val = parseInt(document.getElementById('priceRange').value);
+  const pct = ((val - 5000) / (500000 - 5000)) * 100;
+  document.getElementById('priceRange').style.setProperty('--val', pct + '%');
+  document.getElementById('priceVal').textContent = val.toLocaleString('en-IN');
+}
+
+function clearFilters() {
+  document.querySelectorAll('.filter-brand, .filter-cat, .filter-gender').forEach(el => el.checked = false);
+  document.getElementById('filterStock').checked = false;
+  document.getElementById('priceRange').value = 500000;
+  document.getElementById('searchInput').value = '';
+  document.getElementById('sortSelect').value = 'default';
+  updatePriceDisplay();
+  renderProducts(watches);
+  showToast('Filters cleared', 'default', 'funnel');
+}
+
+// ── CHECKOUT ──
+function checkout() {
+  if (cart.length === 0) { showToast('Your cart is empty', 'error', 'bag-x-fill'); return; }
+  showToast('Redirecting to checkout…', 'success', 'credit-card-fill');
+  setTimeout(() => alert('Checkout flow would continue here!\n\nThank you for shopping at LuxeTime.'), 1200);
+}
+</script>
+</body>
+</html>
